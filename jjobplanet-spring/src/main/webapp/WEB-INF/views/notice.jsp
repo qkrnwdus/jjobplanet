@@ -51,7 +51,8 @@
                                     <span class="notice_date">등록일</span>
                                 </div>
                                 <div class="notice_td_row">
-                                    <span class="notice_title"><a href="openNotice(1);">1/28일(금)~2/2일(수) 잡플래닛 고객센터 설 휴무 진행 안내</a></span>                                    <span class="notice_date">2020-02-02</span>
+                                    <span class="notice_title"><a href="javascript:openNotice(1);">1/28일(금)~2/2일(수) 잡플래닛 고객센터 설 휴무 진행 안내</a></span>                                   
+                                    <span class="notice_date">2020-02-02</span>
                                 </div>
                                 <div id="notice_notice1" class="notice_note_row">
                                     <span class="notice_note">
@@ -68,7 +69,7 @@
                                     </span>
                                 </div>
                                 <div class="notice_td_row">
-                                    <span class="notice_title"><a href="openNotice(2);">공지제목입니다2</a></span>
+                                    <span class="notice_title"><a href="javascript:openNotice(2);">공지제목입니다2</a></span>
                                     <span class="notice_date">2020-02-02</span>
                                 </div>
                                 <div id="notice_notice2" class="notice_note_row">
