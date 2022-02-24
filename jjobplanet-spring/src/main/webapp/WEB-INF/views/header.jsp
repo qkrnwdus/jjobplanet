@@ -1,6 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<script src="./jquery-3.6.0.min.js"></script>
+<script src="./app.js"></script>
+<script>
+    window.onload = () => {
+        
+        let container = document.getElementById("history-item");
+        let cookies = document.cookie;
+        
 
+        if(cookies === '') container.innerText('최근 검색 내역이 없습니다');
+        else {
+            cookies = cookies.split('; ');
+    
+            for( item in cookies) 
+            {
+                let tmp = cookies[item].split("=")[0];
+
+                container.innerHTML += '<li id="history-'+tmp+'"><div style="display: flex; align-items: center;">'
+                + '<a style="width: 100%" href="./search.do?q='+tmp+'">'+tmp+'</a>'
+                + '<div style="display: flex;  flex-direction: column;">'
+                + '<span class="material-icons" onclick="removeCookie('+tmp+')" style="cursor: pointer">clear</span>'
+                + '</div>'
+                + '</div></li>';
+            }
+        }
+    }
+
+</script>
 <div id="warp-header">
 	<div id="warp-header-container">
 	    <div style="display: flex; margin-right: 30px; vertical-align: middle; align-items: center;"><a href="/">JJobPlanet</a></div>   
@@ -27,19 +54,25 @@
     <div style="padding: 16px; ">
         <div style="font-weight: bold">최근 검색어</div>
         <div style="display: block;">
-            
-            <ul style="margin-top: 12px;">
-                <li><a href="./search.do">오피지지</a></li>
+            <ul id="history-item" style="margin-top: 12px;">
+                <!-- <li>
+                    <div style="display: flex; align-items: center;">
+                        <a style="width: 100%" href="./search.do">오피지지</a>
+                        <div style="display: flex;  flex-direction: column;">
+                            <span class="material-icons">clear</span>
+                        </div>
+                    </div>
+                </li>
                 <li><a href="./search.do">우아한 형제들</a></li>
                 <li><a href="./search.do">토스</a></li>
                 <li><a href="./search.do">카카오</a></li>
-                <li><a href="./search.do">쿠팡</a></li>
+                <li><a href="./search.do">쿠팡</a></li> -->
             </ul>
         </div>  
        
     </div>
     <div style="border-top: solid black 1px; padding: 16px">
-        <a href="./search.jsp" style="padding-right: 16px;">모두 지우기</a>
+        <a  style="padding-right: 16px;" href="javascript:removeCokkie()">모두 지우기</a>
     </div>
    
 </div>

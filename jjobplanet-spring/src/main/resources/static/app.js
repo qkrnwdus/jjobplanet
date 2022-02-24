@@ -32,7 +32,9 @@ function clearSearchInput(){
 
 function search()
 {
-	location.href='./search.do';
+	//location.href='./search.do';
+
+    setCookie();
 }
 
 function applyCompany()
@@ -52,4 +54,23 @@ function openAnswer(id)
 function openNotice(id)
 {
     $("#notice_notice"+id).toggle();
+}
+
+function setCookie()
+{
+    let keyword = document.getElementById("search-input").value;
+
+    let date = new Date();
+    date.setDate(date.getDate() + 365);
+    
+    document.cookie = keyword+"="+escape(keyword)+";"+"path=/; expires="+date.toGMTString()+";";
+}
+function removeCookie(key)
+{
+    let keyword = document.getElementById("history-" + key);
+    let data = new Date() - 1 ;
+    document.cookie=key + "=; path=/ expires="+data+";";
+    keyword.remove();
+    
+    alert('aasa');
 }
