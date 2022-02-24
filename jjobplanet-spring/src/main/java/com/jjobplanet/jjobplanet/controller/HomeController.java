@@ -125,7 +125,8 @@ public class HomeController {
 	}
 
 	@GetMapping("/notice")
-	public String notice() {
+	public String notice()
+	{
 		return "notice";
 	}
 
@@ -146,8 +147,8 @@ public class HomeController {
 		String noticenote = request.getParameter("noticenote");
 		System.out.println("noticetitle= " + noticetitle + " noticenote= " + noticenote);
 
-		noticeWriteDB noticeDB = new noticeWriteDB();
-		noticeDB.doNoticeWrite(request, response);
+		noticeWriteDB noticewriteDB = new noticeWriteDB();
+		noticewriteDB.doNoticeWrite(request, response);
 
 		return "redirect:/notice";
 	}
