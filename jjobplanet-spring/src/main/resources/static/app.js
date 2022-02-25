@@ -35,7 +35,11 @@ function search()
     setCookie();
 
     let keyword = document.getElementById("search-input").value;
-    location.href='./search.do?q='+keyword;
+    let cat =  'sample';
+    let region =  'sample';
+    let career = 'sample';
+
+    location.href='./search.do?q='+keyword+'&cat='+cat+'&region='+region+'&career='+career;
 }
 
 function applyCompany()
