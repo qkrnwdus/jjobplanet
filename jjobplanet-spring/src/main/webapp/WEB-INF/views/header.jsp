@@ -3,8 +3,8 @@
 <script src="./jquery-3.6.0.min.js"></script>
 <script src="./app.js"></script>
 <script>
-    window.onload = () => {
-        
+    window.onload = () => 
+    {
         let container = document.getElementById("history-item");
         let cookies = document.cookie;
         let keyword = '<%= request.getParameter("q") %>'
@@ -18,7 +18,6 @@
             for( item in cookies) 
             {
                 let tmp = cookies[item].split("=")[0];
-
                 
                 container.innerHTML += '<li><div style="display: flex; align-items: center;">'
                 + '<a style="width: 100%" href="./search.do?q='+tmp+'">'+tmp+'</a>'
@@ -57,20 +56,7 @@
     <div style="padding: 16px; ">
         <div style="font-weight: bold">최근 검색어</div>
         <div style="display: block;">
-            <ul id="history-item" style="margin-top: 12px;">
-                <!-- <li>
-                    <div style="display: flex; align-items: center;">
-                        <a style="width: 100%" href="./search.do">오피지지</a>
-                        <div style="display: flex;  flex-direction: column;">
-                            <span class="material-icons">clear</span>
-                        </div>
-                    </div>
-                </li>
-                <li><a href="./search.do">우아한 형제들</a></li>
-                <li><a href="./search.do">토스</a></li>
-                <li><a href="./search.do">카카오</a></li>
-                <li><a href="./search.do">쿠팡</a></li> -->
-            </ul>
+            <ul id="history-item" style="margin-top: 12px;"></ul>
         </div>  
        
     </div>
