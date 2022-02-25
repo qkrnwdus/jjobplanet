@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.jjobplanet.jjobplanet.databasemanager.comjoinDB;
 import com.jjobplanet.jjobplanet.databasemanager.indvjoinDB;
 import com.jjobplanet.jjobplanet.databasemanager.loginDB;
+import com.jjobplanet.jjobplanet.databasemanager.noticeWriteDB;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -124,8 +125,14 @@ public class HomeController {
 	}
 
 	@GetMapping("/notice")
-	public String notice() {
+	public String notice()
+	{
 		return "notice";
+	}
+
+	@GetMapping("/noticeWrite.do")
+	public String noticeWrite() {
+		return "noticeWrite";
 	}
 
 	@GetMapping("/faq")
@@ -133,11 +140,16 @@ public class HomeController {
 		return "faq";
 	}
 
-	
-
-	@RequestMapping(value="/noticeWriteAction.do")
-	public String noticeWriteAction()
+	@RequestMapping(value="/noticeWriteAction.do", method = RequestMethod.POST)
+	public String noticeWriteAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		String noticetitle = request.getParameter("noticetitle");
+		String noticenote = request.getParameter("noticenote");
+		System.out.println("noticetitle= " + noticetitle + " noticenote= " + noticenote);
+
+		noticeWriteDB noticewriteDB = new noticeWriteDB();
+		noticewriteDB.doNoticeWrite(request, response);
+
 		return "redirect:/notice";
 	}
 

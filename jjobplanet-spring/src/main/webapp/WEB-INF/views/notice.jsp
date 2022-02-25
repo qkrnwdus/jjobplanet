@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -68,6 +67,7 @@
                                         감사합니다.
                                     </span>
                                 </div>
+                                <!--
                                 <div class="notice_td_row">
                                     <span class="notice_title"><a href="javascript:openNotice(2);">공지제목입니다2</a></span>
                                     <span class="notice_date">2020-02-02</span>
@@ -75,6 +75,7 @@
                                 <div id="notice_notice2" class="notice_note_row">
                                     <span class="notice_note">공지내용입니다2</span>
                                 </div>
+                                -->
                                 <a href="<%= request.getContextPath() %>/noticeWrite.do"><input type="button" value="작성" style="float:right;"></a>
                             </div>
                         </div>
