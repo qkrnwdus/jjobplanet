@@ -7,9 +7,11 @@
         
         let container = document.getElementById("history-item");
         let cookies = document.cookie;
-        
+        let keyword = '<%= request.getParameter("q") %>'
 
-        if(cookies === '') container.innerText('최근 검색 내역이 없습니다');
+        if(keyword !== 'null') document.getElementById("search-input").value = keyword;
+
+        if(cookies === '') container.innerText = '최근 검색 내역이 없습니다';
         else {
             cookies = cookies.split('; ');
     
@@ -17,10 +19,11 @@
             {
                 let tmp = cookies[item].split("=")[0];
 
-                container.innerHTML += '<li id="history-'+tmp+'"><div style="display: flex; align-items: center;">'
+                
+                container.innerHTML += '<li><div style="display: flex; align-items: center;">'
                 + '<a style="width: 100%" href="./search.do?q='+tmp+'">'+tmp+'</a>'
-                + '<div style="display: flex;  flex-direction: column;">'
-                + '<span class="material-icons" onclick="removeCookie('+tmp+')" style="cursor: pointer">clear</span>'
+                + '<div style="display: flex;  flex-direction: column;" onclick="removeCookie(\''+tmp+'\');">'
+                + '<span class="material-icons" style="cursor: pointer">clear</span>'
                 + '</div>'
                 + '</div></li>';
             }
@@ -71,8 +74,8 @@
         </div>  
        
     </div>
-    <div style="border-top: solid black 1px; padding: 16px">
-        <a  style="padding-right: 16px;" href="javascript:removeCokkie()">모두 지우기</a>
+    <div style="border-top: solid black 1px; padding: 16px" onclick="removeCookies()">
+        <a style="padding-right: 16px;">모두 지우기</a>
     </div>
    
 </div>
