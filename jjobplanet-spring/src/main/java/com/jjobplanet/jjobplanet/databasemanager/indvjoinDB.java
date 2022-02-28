@@ -16,7 +16,7 @@ import org.json.simple.JSONObject;
 public class indvjoinDB
 {
 
-	public String doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public boolean doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
 
 		
@@ -35,15 +35,20 @@ public class indvjoinDB
 			String sql = "insert into user (umail, upw) values "
 					   + "('" + umail + "',md5('" + upw + "'))";
 			stmt.executeUpdate(sql);
-			object.put("result", "OK");			
+			object.put("result", "OK");	
+			
+			return true;
+			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			
-			 object.put("result", "FAIL");
+			object.put("result", "FAIL");
+
+			return false;
 		}
 
 
-		return object.toJSONString();
+		//return object.toJSONString();
 	}
 }
