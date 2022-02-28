@@ -9,15 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jjobplanet.jjobplanet.MailService;
-import com.jjobplanet.jjobplanet.databasemanager.comjoinDB;
-import com.jjobplanet.jjobplanet.databasemanager.indvjoinDB;
-import com.jjobplanet.jjobplanet.databasemanager.loginDB;
-import com.jjobplanet.jjobplanet.databasemanager.noticeWriteDB;
 
+import com.jjobplanet.jjobplanet.databasemanager.noticeWriteDB;
+import com.jjobplanet.jjobplanet.domain.AccountDao;
+
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -155,31 +156,48 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/joinOk.do", method = RequestMethod.POST)
-	public String joinOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String joinOk(HttpServletRequest request, HttpServletResponse response)
+	{
+		AccountDao account = new AccountDao();
+		boolean result = account.joinoUser(request);
 
-		indvjoinDB injoin = new indvjoinDB();
-		boolean result = injoin.doPost(request, response);
-
-		if(result){
-			
+		if(result)
+		{
 			MailService mailsevrice = new MailService();
 		
-			if(mailsevrice.sendMail("endrmfl1234@gmail.com")) System.out.println("메일 전송 성공");
-			else System.out.println("메일 전송 실패");			
-		}else{
-			System.out.println("오류");
-		}
-		return "joinOk";
+			if(mailsevrice.sendMail(request.getParameter("umail")))
+			{
+				System.out.println("메일 전송 성공");
+				return "joinOk"; 
+			} else { 
+				
+				System.out.println("메일 전송 실패");	
+				return "redirect:/"; 
+			}		
+		} return "error/500";
 	}
 	
 	@RequestMapping(value = "/joinokCompany.do", method = RequestMethod.POST)
-	public void joinOkcompany(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String joinOkcompany(HttpServletRequest request, HttpServletResponse response)
+	{
 				
-		comjoinDB comjoin = new comjoinDB();
-		String result = comjoin.doComjoin(request, response);
+		AccountDao account = new AccountDao();
+		boolean result = account.joinCompany(request);
 		
-		PrintWriter out = response.getWriter();
-		out.println(result);
+		if(result)
+		{
+			MailService mailsevrice = new MailService();
+		
+			if(mailsevrice.sendMail(request.getParameter("umail")))
+			{
+				System.out.println("메일 전송 성공");
+				return "redirect:/joinOk"; 
+			} else { 
+				
+				System.out.println("메일 전송 실패");	
+				return "redirect:/"; 
+			}		
+		} return "error/500";
 	}
 	
 	@GetMapping("/login")
@@ -190,11 +208,19 @@ public class HomeController {
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public void login( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		loginDB loginDB = new loginDB();
-		String result = loginDB.doLogin(request, response);
+		AccountDao account = new AccountDao();
+		//boolean result = account.login(request);
+		String result = account.login(request);
+		// ModelAndView view = new ModelAndView();
+
+		// view.setViewName("index");
+
+		// if(result) return view;
+		// else return null;
 
 		PrintWriter out = response.getWriter();
-		out.println(result);
+		out.print(result);
+
 	}
 
 
@@ -224,15 +250,5 @@ public class HomeController {
 		return "findPasswordOk";
 	}
 
-	@RequestMapping(value ="/mail", method = RequestMethod.POST)
-	public void mail(HttpServletRequest request)
-	{
-		String target = request.getParameter("name");
-
-		MailService service = new MailService();
-		if(service.sendMail(target)) System.out.println("메일 전송 성공");
-		else System.out.println("메일 전송 실패");
-
-	}
-
+	
 }

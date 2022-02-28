@@ -29,10 +29,11 @@
         {
             let mail = $('#umail').val();
             let pw = $('#upw').val();
+            
             let type = $('input[name="category"]:checked').val();
 
             if(umail === '' || upw === '') alert('이메일 또는 비밀번호를 다시 입력해주세요');
-            else if(validateEmail(mail)) alert('이메일을 다시 입력해 주세요')
+            else if(!validateEmail(mail)) alert('이메일을 다시 입력해 주세요')
             else {
                 $.ajax({
                     
@@ -45,20 +46,11 @@
                         'upw' : pw
                     },
                     success : (response) => {
-                        
+                    
+                        console.log(response);
 
-                        let result = response;
-
-                        console.log(result);
-
-                        location.href='/';
-                        
-                        // if(response.result === 'SUCCESS')
-                        // {
-                        
-                        //  	
-                        //      console.log('aa');
-                        // } else alert('아이디 또는 비밀번호가 맞지 않습니다');
+                        // if(response.result === 'SUCCESS') location.href='/'
+                        // else alert('아이디 또는 비밀번호가 맞지 않습니다');
                     },
                     error: (response) => {
                         alert('오류가 발생하였습니다. 잠시후 재시도 해주세요');
@@ -81,8 +73,8 @@
                         <input type="radio" value="company" name="category" style="margin-right: 4px; margin-left: 8px;">기업
                     </div>
 
-                    <div style="margin-top: 16px;"><input id="umail" type="text" size="20" placeholder="이메일"></div>
-                    <div style="margin-top: 16px"> <input id="upw" type="password" size="20"placeholder="비밀번호">
+                    <div style="margin-top: 16px;"><input id="umail" type="text" size="20" placeholder="이메일" required></div>
+                    <div style="margin-top: 16px"> <input id="upw" type="password" size="20"placeholder="비밀번호" required>
                     </div>
                     <div class="login_input" style="margin-top: 16px;">
                         <button onclick="login()" id="join_button">로그인</button>

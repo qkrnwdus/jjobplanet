@@ -26,8 +26,9 @@
         {				
             let umail = $('#umail').val();
             let upw = $('#upw').val();
+            let upw2 = $('#upw2').val();
 
-            if (umail === '' || validateEmail(umail)) alert('이메일을 다시 입력해 주세요');
+            if (umail === '' || !validateEmail(umail)) alert('이메일을 다시 입력해 주세요');
             else if (upw === '' || upw2 === '') alert('비밀번호를 입력해 주세요');
             else if (upw !== upw2) alert('비밀번호가 일치하지 않습니다.');
             else {
@@ -63,7 +64,7 @@
                         </div>
                         <div style="margin-top: 16px;">
                             <input type="password" size="20" id="upw" name="upw" placeholder="비밀번호">
-                            <input type="password" size="20" id="upwcheck" name="upw2" placeholder="비밀번호 확인">
+                            <input type="password" size="20" id="upw2" name="upw2" placeholder="비밀번호 확인">
                         </div>
 
                         <div  style="margin-top: 16px;">
