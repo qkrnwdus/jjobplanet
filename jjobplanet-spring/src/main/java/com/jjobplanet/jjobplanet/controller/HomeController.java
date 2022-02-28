@@ -49,11 +49,11 @@ public class HomeController {
 	public String search(HttpServletRequest request) {
 		
 		
-		String q = request.getParameter("q");
-		Cookie cookie = new Cookie("search_history", q);
+		String keyword = request.getParameter("key");
+		String category = request.getParameter("cat");
+		String region = request.getParameter("region");
+		String career = request.getParameter("career");
 		
-		cookie.setMaxAge(0);
-		cookie.setPath("/");
 
 		return "search";
 	}
