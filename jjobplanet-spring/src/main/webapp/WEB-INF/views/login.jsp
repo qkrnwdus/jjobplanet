@@ -20,50 +20,53 @@
         <!-- SCRIPT-->
            
         <script src="./jquery-3.6.0.min.js"></script>
+        <script src="./app.js"></script>
         
 
         <script>		
-			function login() 
-			{
-				let mail = $('#umail').val();
-				let pw = $('#upw').val();
-                let type = $('input[name="category"]:checked').val();
 
-				if(umail === '' || upw === '') alert('이메일 또는 비밀번호를 입력해 주세요');
-				else {
-					$.ajax({
-						
-						url: 'login.do',
-				        method: 'POST',
-                        dataType: "json",
-				        data: {
-                            'type' : type,
-				            'umail' : mail,
-				            'upw' : pw
-				        },
-				        success : (response) => {
-				        	
+        function login() 
+        {
+            let mail = $('#umail').val();
+            let pw = $('#upw').val();
+            let type = $('input[name="category"]:checked').val();
 
-                            let result = response;
+            if(umail === '' || upw === '') alert('이메일 또는 비밀번호를 다시 입력해주세요');
+            else if(validateEmail(mail)) alert('이메일을 다시 입력해 주세요')
+            else {
+                $.ajax({
+                    
+                    url: 'login.do',
+                    method: 'POST',
+                    dataType: "json",
+                    data: {
+                        'type' : type,
+                        'umail' : mail,
+                        'upw' : pw
+                    },
+                    success : (response) => {
+                        
 
-                            console.log(result);
+                        let result = response;
 
-                            location.href='/';
-                            
-							// if(response.result === 'SUCCESS')
-							// {
-							
-							//  	
-                            //      console.log('aa');
-							// } else alert('아이디 또는 비밀번호가 맞지 않습니다');
-				        },
-                        error: (response) => {
-                            alert('오류가 발생하였습니다. 잠시후 재시도 해주세요');
-                        }	      
-					})
-				}
-				
-			}
+                        console.log(result);
+
+                        location.href='/';
+                        
+                        // if(response.result === 'SUCCESS')
+                        // {
+                        
+                        //  	
+                        //      console.log('aa');
+                        // } else alert('아이디 또는 비밀번호가 맞지 않습니다');
+                    },
+                    error: (response) => {
+                        alert('오류가 발생하였습니다. 잠시후 재시도 해주세요');
+                    }	      
+                })
+            }
+            
+        }
 		</script>
 
     </head>

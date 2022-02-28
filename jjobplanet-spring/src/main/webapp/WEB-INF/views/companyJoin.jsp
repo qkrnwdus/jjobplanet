@@ -40,8 +40,8 @@
             let chomepage = $('#chomepage').val();
 
 
-            if (cmail === '') alert('이메일을 입력해 주세요');
-            else if (cpw === '' || cpw2 === '' ) alert('비밀번호를 입력해 주세요');
+            if (cmail === ''  || !validateEmail(cmail)) alert('이메일을 다시 입력해 주세요 주세요');
+            else if (cpw === '' || cpw2 === ''  || cpw !== cpw2) alert('비밀번호를 다시 입력 주세요');
             else if (cname === '') alert('이메일을 입력해 주세요');
             else if (ccategory === '') alert('이메일을 입력해 주세요');
             else if (csize === '') alert('이메일을 입력해 주세요');

@@ -17,21 +17,19 @@
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
         
         <!-- SCRIPT-->
-        <script src="./app.js"></script>    
+        <script src="./app.js"></script>   
+        <script src="./jquery-3.6.0.min.js"></script> 
         
         <script>
-		
+        
         function formCheck() 
         {				
-            	
-            
-
             let umail = $('#umail').val();
             let upw = $('#upw').val();
 
-            if (umail === '') alert('이메일을 입력해 주세요');
-            else if (upw === '' || upwcheck === '' ) alert('비밀번호를 입력해 주세요');
-            else if (upw !== upwcheck) alert('비밀번호가 일치하지 않습니다.');
+            if (umail === '' || validateEmail(umail)) alert('이메일을 다시 입력해 주세요');
+            else if (upw === '' || upw2 === '') alert('비밀번호를 입력해 주세요');
+            else if (upw !== upw2) alert('비밀번호가 일치하지 않습니다.');
             else {
                 $.ajax({
                     url: 'joinOk.do',
@@ -65,7 +63,7 @@
                         </div>
                         <div style="margin-top: 16px;">
                             <input type="password" size="20" id="upw" name="upw" placeholder="비밀번호">
-                            <input type="password" size="20" id="upwcheck" name="upwcheck" placeholder="비밀번호 확인">
+                            <input type="password" size="20" id="upwcheck" name="upw2" placeholder="비밀번호 확인">
                         </div>
 
                         <div  style="margin-top: 16px;">
