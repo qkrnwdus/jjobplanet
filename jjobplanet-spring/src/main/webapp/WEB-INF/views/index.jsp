@@ -3,12 +3,12 @@
 
 <%
     HttpSession sessions = request.getSession();
-
-    if(session != null)
+    Object a = sessions.getAttribute("no");
+    if(a != null)
     {
-        String a = sessions.getAttribute("no").toString();
-        System.out.println(a);
-    }
+        System.out.println("로그인");
+        System.out.println(a.toString());
+    } else System.out.println("로그아웃");
 %>
 
 <!DOCTYPE html>
