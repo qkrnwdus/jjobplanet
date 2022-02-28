@@ -53,9 +53,9 @@
             else if (cdate === '') alert('이메일을 입력해 주세요');
             else if (cmaintask === '') alert('이메일을 입력해 주세요');
             else if (chomepage === '') alert('이메일을 입력해 주세요');
-
             else {
-                $.ajax({
+                $.ajax(
+                {
                     url: 'joinokCompany.do',
                     method: 'POST',
                     dataType: "json",
@@ -74,15 +74,34 @@
                         'cworkers' : cworkers,
                         'chomepage' : chomepage
                     },
-                    success : (response) => { location.href = '/'; },
+                    success : (response) => {
+                        if(response.result === 'SUCCESS') location.href='joinOk.do';
+                    },
                     error : (response) => { alert('오류가 발생하였습니다. 잠시후 재시도 해주세요'); }
 
                 })
             }			
         }
 
-        function idCheck()
+        function validateCompanyEmail() 
         {
+            let mail = $('#cmail').val();
+            if(validateEmail(mail))
+            {
+                $.ajax({
+                    url: 'validate.do',
+                    method: 'POST',
+                    data: {
+                        'mail' : mail,
+                        'tpye' : 'company'				           
+                    },
+                    success : (response) => {   
+                        if(response.result === 'VALIDATED') alert('사용가능한 이메일 주소입니다.');
+                        else alert('사용이 불가능한 이메일 주소입니다.');
+                    },
+                    error : (response) => { alert('오류가 발생하였습니다. 잠시후 재시도 해주세요'); }   
+                })
+            } else alert('이메일을 다시 입력해 주세요 주세요');
             
         }
         
@@ -104,7 +123,7 @@
                             <dd>
                                 <div>
                                     <input type="email" size="20" name="cmail" id="cmail">
-                                    <input type="button" value="중복확인" id="join_button" onclick="idCheck();">
+                                    <input type="button" value="중복확인" id="join_button" onclick="validateCompanyEmail();">
                                 </div>
                             </dd>
                         </dl>

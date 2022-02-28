@@ -157,16 +157,28 @@ public class AccountDao {
 
     }
 
-    public boolean logout()
+    public boolean logout(HttpServletRequest request)
     {
-        return false;
+        request.getSession().invalidate();
+        return true;
     }
 
-
-    public boolean join()
+    public boolean validateEmail(String type, String email)
     {
-        return false;
+        try(Connection conn =  DriverManager.getConnection(host,userid,passwd);
+			Statement stmt = conn.createStatement()) 
+		{	
+
+            String sql;
+
+            if(type.equals("user")) sql = "SELECT EXISTS (SELECT  * from user where umail = "+email+") AS isVALID";
+            else sql = "SELECT EXISTS (SELECT  * from company where umail = "+email+") AS isVALID";
+			
+			ResultSet result = stmt.executeQuery(sql);
+
+            if(result.next()) return false;
+            return true;
+			
+		} catch (Exception e) { return false; }
     }
-
-
 }

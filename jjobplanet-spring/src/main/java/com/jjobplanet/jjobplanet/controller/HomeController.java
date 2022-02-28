@@ -250,5 +250,18 @@ public class HomeController {
 		return "findPasswordOk";
 	}
 
+
+	@RequestMapping("/validate.do")
+	public void validateEmail(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		AccountDao accountDao = new AccountDao();
+
+		String type = request.getParameter("type");
+		String email = request.getParameter("mail");
+		Boolean result = accountDao.validateEmail(type, email);
+
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
 	
 }
