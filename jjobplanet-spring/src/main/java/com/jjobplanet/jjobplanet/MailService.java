@@ -16,13 +16,15 @@ public class MailService {
     private final String MAIL_PASSWORD      = "siqibdkqheyfyorf";
 
     public boolean sendMail(String target)
-    {
-
+    {   
+               
         try {
+            
             SimpleMailMessage message = new SimpleMailMessage();
+
             message.setTo(target);
-            message.setSubject("subject");
-            message.setText("content");
+            message.setSubject("인증 메일입니다.");
+            message.setText("인증을 완료해주세요.");
     
             JavaMailSenderImpl sender = new JavaMailSenderImpl();
             sender.setHost(MAIL_HOST);
@@ -37,8 +39,7 @@ public class MailService {
             sender.send(message);
 
             return true;
-        } catch(Exception e) {
-            return false;
-        }
+
+        } catch(Exception e) {      return false;        }
     }
 }

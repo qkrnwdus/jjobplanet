@@ -164,12 +164,21 @@ public class HomeController {
 		return "join";
 	}
 	
-	@RequestMapping(value = "/joinOk.do")
+	@RequestMapping(value = "/joinOk.do", method = RequestMethod.POST)
 	public String joinOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//indvjoinDB injoin = new indvjoinDB();
-		//String result = injoin.doPost(request, response);
-	
+		indvjoinDB injoin = new indvjoinDB();
+		boolean result = injoin.doPost(request, response);
+
+		if(result){
+			
+			MailService mailsevrice = new MailService();
+		
+			if(mailsevrice.sendMail("endrmfl1234@gmail.com")) System.out.println("메일 전송 성공");
+			else System.out.println("메일 전송 실패");			
+		}else{
+			System.out.println("오류");
+		}
 		return "joinOk";
 	}
 	
@@ -226,15 +235,14 @@ public class HomeController {
 		return "findPasswordOk";
 	}
 
-	@GetMapping("/mail")
+	@RequestMapping(value ="/mail", method = RequestMethod.POST)
 	public void mail(HttpServletRequest request)
 	{
-
 		String target = request.getParameter("name");
 
 		MailService service = new MailService();
 		if(service.sendMail(target)) System.out.println("메일 전송 성공");
-		else System.out.println("메일 전송 실패");; 
+		else System.out.println("메일 전송 실패");
 
 	}
 	@GetMapping("/logout")
@@ -244,3 +252,5 @@ public class HomeController {
 	}
 
 }
+	
+

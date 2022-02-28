@@ -54,7 +54,7 @@
     </head>
     <body>
         <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
-            <form name="individualJoin" id="individualJoin" method="post" action="./joinOk.do"">
+            <form name="individualJoin" id="individualJoin" method="post" action="./joinOk.do">
                 <div>
                     <div style="text-align: center;"><img style="width: 500px; height: auto;object-fit: cover; margin: 0 auto;" src="./img/recruit.png";></div>
                     <div>
