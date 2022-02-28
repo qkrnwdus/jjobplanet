@@ -407,7 +407,8 @@ textarea {
 #search-option-recruitcategory ul li,
 #search-option-region  ul li,
 #search-option-condition  ul li { margin: 4px; }
-
 #search-option-recruitcategory ul li input,
 #search-option-region  ul li input,
 #search-option-condition  ul li input { margin-right: 4px; }
+#search-option-recruitcategory, #search-option-region,
+#search-option-condition { cursor: pointer; }

@@ -64,6 +64,40 @@
                 document.getElementById("search-option-region").style.display='none';
             }
 
+            function research() {
+                
+                let keyword = '<%= request.getParameter("key")%>';
+                let cat = $('input[name="recruitcategory:checked"').val();
+                let region = $('input[name="region:checked"').val();
+                let career = $('input[name="condition:checked"').val();
+
+                console.log(cat);
+                console.log(region);
+                console.log(career);
+
+
+                $.ajax({
+                    url: '/search.do',
+                    method: 'GET',
+                    data: {
+                        'key': keyword ,
+                        'cat': cat ,
+                        'region': region ,
+                        'career': career
+                    },
+                    success: (response) => {
+
+                    },
+                    error: (response) => {
+                        
+                    }
+
+                })
+
+                
+            }
+
+
             
         </script>
        
@@ -87,15 +121,15 @@
                                 </div>   
                                 <div id="search-option-recruitcategory" style=" display: none; width: 130px; position: absolute; border: solid black 1px; background-color: white;">
                                     <ul>
-                                        <li><input type="radio" name="recruitcategory">프론트엔드</li>
-                                        <li><input type="radio" name="recruitcategory">백엔드</li>
-                                        <li><input type="radio" name="recruitcategory">모바일</li>
-                                        <li><input type="radio" name="recruitcategory">AI/ML</li>
-                                        <li><input type="radio" name="recruitcategory">데브옵스</li>
-                                        <li><input type="radio" name="recruitcategory">QA</li>
-                                        <li><input type="radio" name="recruitcategory">GAME</li>
-                                        <li><input type="radio" name="recruitcategory">임베디드</li>
-                                        <li><input type="radio" name="recruitcategory">보안</li>
+                                        <li><input type="radio" name="recruitcategory" value="1" checked>프론트엔드</li>
+                                        <li><input type="radio" name="recruitcategory" value="2">백엔드</li>
+                                        <li><input type="radio" name="recruitcategory" value="3">모바일</li>
+                                        <li><input type="radio" name="recruitcategory" value="4">AI/ML</li>
+                                        <li><input type="radio" name="recruitcategory" value="5">데브옵스</li>
+                                        <li><input type="radio" name="recruitcategory" value="6">QA</li>
+                                        <li><input type="radio" name="recruitcategory" value="7">GAME</li>
+                                        <li><input type="radio" name="recruitcategory" value="8">임베디드</li>
+                                        <li><input type="radio" name="recruitcategory" value="9">보안</li>
                                     </ul>
                                 </div>
                				</div>
@@ -108,15 +142,15 @@
                                 </div>
                                 <div id="search-option-region" style=" display: none; width: 130px; position: absolute; border: solid black 1px; background-color: white;">
                                     <ul>
-                                        <li><input type="radio" name="region">서울</li>
-                                        <li><input type="radio" name="region">부산</li>
-                                        <li><input type="radio" name="region">대구</li>
-                                        <li><input type="radio" name="region">인천</li>
-                                        <li><input type="radio" name="region">대전</li>
-                                        <li><input type="radio" name="region">광주</li>
-                                        <li><input type="radio" name="region">울산</li>
-                                        <li><input type="radio" name="region">세종</li>
-                                        <li><input type="radio" name="region">제주</li>
+                                        <li><input type="radio" name="region" value="1" checked>서울</li>
+                                        <li><input type="radio" name="region" value="2">부산</li>
+                                        <li><input type="radio" name="region" value="3">대구</li>
+                                        <li><input type="radio" name="region" value="4">인천</li>
+                                        <li><input type="radio" name="region" value="5">대전</li>
+                                        <li><input type="radio" name="region" value="6">광주</li>
+                                        <li><input type="radio" name="region" value="7">울산</li>
+                                        <li><input type="radio" name="region" value="8">세종</li>
+                                        <li><input type="radio" name="region" value="9">제주</li>
                                     </ul>
                                 </div>
                             </div>
@@ -129,13 +163,14 @@
                                 </div>
                                 <div id="search-option-condition" style=" display: none; width: 130px; position: absolute; border: solid black 1px; background-color: white;">
                                     <ul>
-                                        <li><input type="radio" name="condition">신입</li>
-                                        <li><input type="radio" name="condition">경력(1년이상)</li>
-                                        <li><input type="radio" name="condition">경력무관</li>
+                                        <li><input type="radio" name="condition" value="0" checked>경력무관</li>
+                                        <li><input type="radio" name="condition" value="1">신입</li>
+                                        <li><input type="radio" name="condition" value="2">경력(1년이상)</li>
+                                       
                                     </ul>
                                 </div>
                             </div>
-                            <button>재검색</button>
+                            <button onclick="research()">재검색</button>
                			</div>
 
                         <div id="search-result" style="margin-top: 10px;">

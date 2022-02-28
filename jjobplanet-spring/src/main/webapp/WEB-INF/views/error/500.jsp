@@ -19,7 +19,7 @@
         <div id="warp-main" style="display:flex; justify-content: center; align-items: center; min-height: 100vh;">
         <!-- 내용 -->
         <div>
-            <div style="width: 500px; height: 500px; background-image: url('./img/404.png');"></div>
+            <div style="width: 500px; height: 500px; background-image: url('./img/500.png');"></div>
             <div style="text-align: center;">
                 <h1>500</h1>
                 <div style="font-size: 20px;">서버에서 오류가 발생되었습니다</div>
