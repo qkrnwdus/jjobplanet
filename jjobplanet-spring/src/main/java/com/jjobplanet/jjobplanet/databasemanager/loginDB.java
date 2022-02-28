@@ -9,51 +9,68 @@ import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public class loginDB
 {
 
-	public void doLogin(HttpServletRequest request,  RedirectAttributes setAttribute) throws ServletException, IOException {
-    	
+	public String doLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 
-		
+		String type = request.getParameter("type");
 		String umail = request.getParameter("umail");
 		String upw  = request.getParameter("upw");
 	
-		String host   = "jdbc:mysql://127.0.0.1:3306/jjobdb?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-		String userid = "root";
-		String passwd = "ezen";
-		
+		String host   = "jdbc:mariadb://cm4ng.iptime.org:3307/jjobplanet?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
+		String userid = "user";
+		String passwd = "!!User@@";
+
+		JSONObject data = new JSONObject();
 		
 		try(Connection conn =  DriverManager.getConnection(host,userid,passwd);
 			Statement stmt = conn.createStatement()) 
 		{	
-			String sql = "";
-			sql  = "select uno,umail ";
-			sql += "from user ";
-			sql += "where uamil = '" + umail + "' ";
-			sql += "and upw = md5('" + upw + "') ";
-			sql += "and uretire = 'N' ";
-			System.out.println("SQL:" + sql);
-			ResultSet result = stmt.executeQuery(sql);
-			if(result.next() == false)
-			{					
-				
-			}else
-			{
-				String uno   = result.getString("uno");
+			String sql; 
 
+			if(type.equals("user")) { 
+				sql = "SELECT uno, umail FROM user";
+				sql += " WHERE umail = '" + umail + "' ";
+				sql += " AND upw = MD5('" + upw + "') ";
+				sql += " AND uretire = 'N' ";
+			} else {
+				sql = "SELECT cno, cmail FROM company";
+				sql += " WHERE cmail = '" + umail + "' ";
+				sql += " AND cpw = MD5('" + upw + "') ";
+				sql += " AND cretire = 'N' ";
+			}
+
+			
+			
+
+			ResultSet result = stmt.executeQuery(sql);
+			if(result.next())
+			{					
+
+				data.put("result", "SUCCESS");
 				HttpSession session = request.getSession();
-				session.setAttribute("uno",uno);
-				session.setAttribute("umail",umail);
-				session.setAttribute("upaw",upw);
+				
+				if(type.equals("user")) session.setAttribute("no", result.getString("uno"));
+				else session.setAttribute("no", result.getString("cno"));
+				
+			} else {
+				data.put("result", "FAIL");
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		return data.toJSONString();
 			
 	}
 }
