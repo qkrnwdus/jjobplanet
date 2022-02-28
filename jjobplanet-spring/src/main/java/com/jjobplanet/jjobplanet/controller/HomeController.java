@@ -2,6 +2,7 @@ package com.jjobplanet.jjobplanet.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -12,7 +13,11 @@ import javax.servlet.http.HttpSession;
 import com.jjobplanet.jjobplanet.databasemanager.comjoinDB;
 import com.jjobplanet.jjobplanet.databasemanager.indvjoinDB;
 import com.jjobplanet.jjobplanet.databasemanager.loginDB;
+import com.jjobplanet.jjobplanet.databasemanager.noticeViewDB;
 import com.jjobplanet.jjobplanet.databasemanager.noticeWriteDB;
+import com.jjobplanet.jjobplanet.domain.noticeDAO;
+import com.jjobplanet.jjobplanet.domain.noticeDTO;
+import com.mysql.cj.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -49,11 +55,11 @@ public class HomeController {
 	public String search(HttpServletRequest request) {
 		
 		
-		String keyword = request.getParameter("key");
-		String category = request.getParameter("cat");
-		String region = request.getParameter("region");
-		String career = request.getParameter("career");
+		String q = request.getParameter("q");
+		Cookie cookie = new Cookie("search_history", q);
 		
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
 
 		return "search";
 	}
@@ -124,10 +130,28 @@ public class HomeController {
 		return "recruitService";
 	}
 
-	@GetMapping("/notice")
-	public String notice()
+	@RequestMapping(value="/notice", method = RequestMethod.GET)
+	public ModelAndView notice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		return "notice";
+		noticeViewDB noticeviewDB = new noticeViewDB();
+		List<String> noticeviewList =  noticeviewDB.doViewNotice(request, response);
+		
+		// List<noticeDTO> noticeList = new ArrayList<noticeDTO>();
+		// noticeDTO ndao = new noticeDTO();
+		// ndao.setNoticeno("noticeno");
+		// ndao.setNoticetitle("noticetitle");
+		// ndao.setNoticedate("noticedate");
+		// ndao.setNoticenote("noticenote");
+		// noticeList.add(ndao);
+		
+		ModelAndView nvList = new ModelAndView();
+
+		nvList.addObject("noticeviewList",  noticeviewList);
+		nvList.setViewName("notice");
+
+		System.out.println("noticeviewList = " + noticeviewList);
+
+		return nvList;
 	}
 
 	@GetMapping("/noticeWrite.do")
