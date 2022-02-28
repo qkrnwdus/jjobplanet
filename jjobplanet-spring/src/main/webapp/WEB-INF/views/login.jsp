@@ -18,35 +18,48 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
         
         <!-- SCRIPT-->
-        <script src="./app.js"></script>       
-        
+           
+        <script src="./jquery-3.6.0.min.js"></script>
         
 
         <script>		
 			function login() 
 			{
-				const mail = $('#umail').val();
-				const pw = $('#upw').val();
-				
+				let mail = $('#umail').val();
+				let pw = $('#upw').val();
+                let type = $('input[name="category"]:checked').val();
+
 				if(umail === '' || upw === '') alert('이메일 또는 비밀번호를 입력해 주세요');
 				else {
 					$.ajax({
 						
 						url: 'login.do',
 				        method: 'POST',
+                        dataType: "json",
 				        data: {
-				           'mail' : umail,
-				           'pw' : upw,
+                            'type' : type,
+				            'umail' : mail,
+				            'upw' : pw
 				        },
 				        success : (response) => {
 				        	
-							if(response.result === 'OK')
-							{
+
+                            let result = response;
+
+                            console.log(result);
+
+                            location.href='/';
+                            
+							// if(response.result === 'SUCCESS')
+							// {
 							
-							 	location.href='login.do';
-							}
-							else alert('아이디 또는 비밀번호가 맞지 않습니다');
-				        }	      
+							//  	
+                            //      console.log('aa');
+							// } else alert('아이디 또는 비밀번호가 맞지 않습니다');
+				        },
+                        error: (response) => {
+                            alert('오류가 발생하였습니다. 잠시후 재시도 해주세요');
+                        }	      
 					})
 				}
 				
@@ -55,28 +68,26 @@
 
     </head>
     <body>
-        <form name="login" method="post" action="./login.do" >
-            <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
-                <div>    
-                    <img style="width: 500px; height: auto;object-fit: cover;" src="./img/recruit.png";>
-                    <h1 style="text-align: center;">로그인</h1>        
-                    <div class="join_div" style="text-align: center;">                                   
-                        <div style="margin-top: 16px;">
-                            <input type="radio" value="개인" name="kind" name="category" style="margin-right: 4px">개인
-                            <input type="radio" value="기업" name="kind" name="category" style="margin-right: 4px; margin-left: 8px;">기업
-                        </div>
-
-                        <div style="margin-top: 16px;"><input type="text" size="20" name="" placeholder="이메일"></div>
-                        <div style="margin-top: 16px"> <input type="text" size="20" name="" placeholder="비밀번호">
-                        </div>
-                        <div class="login_input" style="margin-top: 16px;">
-                            <button onclick="location.href='./login.do'" id="join_button">로그인</button>
-                            <button onclick="location.href='./join'" id="join_button">회원가입</button>
-                            <button onclick="location.href='./findPassword'" id="join_button">비밀번호 찾기</button>
-                        </div>      
+        <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+            <div>    
+                <img style="width: 500px; height: auto;object-fit: cover;" src="./img/recruit.png";>
+                <h1 style="text-align: center;">로그인</h1>        
+                <div class="join_div" style="text-align: center;">                                   
+                    <div style="margin-top: 16px;">
+                        <input type="radio" value="user" name="category" style="margin-right: 4px" checked>개인
+                        <input type="radio" value="company" name="category" style="margin-right: 4px; margin-left: 8px;">기업
                     </div>
-                </div>                      
-            </div> 
-        </form>         
+
+                    <div style="margin-top: 16px;"><input id="umail" type="text" size="20" placeholder="이메일"></div>
+                    <div style="margin-top: 16px"> <input id="upw" type="password" size="20"placeholder="비밀번호">
+                    </div>
+                    <div class="login_input" style="margin-top: 16px;">
+                        <button onclick="login()" id="join_button">로그인</button>
+                        <button onclick="location.href='./join'" id="join_button">회원가입</button>
+                        <button onclick="location.href='./findPassword'" id="join_button">비밀번호 찾기</button>
+                    </div>      
+                </div>
+            </div>                      
+        </div>          
     </body>
 </html>

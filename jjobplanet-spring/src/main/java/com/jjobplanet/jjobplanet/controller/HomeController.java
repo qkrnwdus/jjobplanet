@@ -1,6 +1,7 @@
 package com.jjobplanet.jjobplanet.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -18,10 +19,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -158,41 +162,23 @@ public class HomeController {
 		return "join";
 	}
 	
-	@RequestMapping(value = "/joinOk.do", method = RequestMethod.POST )
+	@RequestMapping(value = "/joinOk.do")
 	public String joinOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-		String umail = request.getParameter("umail");
-		String upw = request.getParameter("upw");
-		System.out.println("umail= " + umail + " upw= " + upw);
 
-		indvjoinDB injoin = new indvjoinDB();
-		injoin.doPost(request, response);
-		
+		//indvjoinDB injoin = new indvjoinDB();
+		//String result = injoin.doPost(request, response);
+	
 		return "joinOk";
 	}
 	
 	@RequestMapping(value = "/joinokCompany.do", method = RequestMethod.POST)
-	public String joinOkcompany(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void joinOkcompany(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		String cmail = request.getParameter("cmail");
-		String cpw  = request.getParameter("cpw");
-		String cname = request.getParameter("cname");
-		String ccategory  = request.getParameter("ccategory");
-		String csize = request.getParameter("csize");
-		String ceoname  = request.getParameter("ceoname");
-		String cinsurance = request.getParameter("cinsurance");
-		String caddress  = request.getParameter("caddress");
-		String cnumber = request.getParameter("cnumber");
-		String cworkers  = request.getParameter("cworkers");
-		String cdate  = request.getParameter("cdate");
-		String cmaintask  = request.getParameter("cmaintask");
-		String chomepage  = request.getParameter("chomepage");
-		System.out.println("umail= " + cmail + " upw= " + cpw);
-
 		comjoinDB comjoin = new comjoinDB();
-		comjoin.doComjoin(request, response);
+		String result = comjoin.doComjoin(request, response);
 		
-		return "joinokCompany";
+		PrintWriter out = response.getWriter();
+		out.println(result);
 	}
 	
 	@GetMapping("/login")
@@ -201,16 +187,14 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, RedirectAttributes setAttribute) throws ServletException, IOException {
-				
-		String umail = request.getParameter("umail");
-		String upw = request.getParameter("upw");		
-		System.out.println("umail= " + umail + " upw= " + upw);
+	
+	public void login( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		loginDB loginDB = new loginDB();
+		String result = loginDB.doLogin(request, response);
 
-		loginDB logindb  = new loginDB();
-		logindb.doLogin(request, setAttribute);
-
-		return login(null, null);
+		PrintWriter out = response.getWriter();
+		out.println(result);
 	}
 
 

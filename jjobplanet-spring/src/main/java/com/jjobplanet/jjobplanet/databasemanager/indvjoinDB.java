@@ -10,23 +10,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
+
 
 public class indvjoinDB
 {
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
 
 		
 		String umail = request.getParameter("umail");
 		String upw  = request.getParameter("upw");
 	
-		String host   = "jdbc:mysql://127.0.0.1:3306/jjobdb?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-		String userid = "root";
-		String passwd = "ezen";
+		String host   = "jdbc:mariadb://cm4ng.iptime.org:3307/jjobplanet?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
+		String userid = "user";
+		String passwd = "!!User@@";
 		
-		PrintWriter out = response.getWriter();
 		JSONObject object = new JSONObject();
 		
 		try(Connection conn =  DriverManager.getConnection(host,userid,passwd);
@@ -42,5 +42,8 @@ public class indvjoinDB
 			
 			 object.put("result", "FAIL");
 		}
+
+
+		return object.toJSONString();
 	}
 }

@@ -68,7 +68,7 @@ function setCookie()
     let date = new Date();
     date.setDate(date.getDate() + 365);
     
-    document.cookie = keyword + "=" + keyword + "; path=/; expires=" + date.toGMTString() + ";";
+    document.cookie = keyword + "=" + keyword + "; path=/; secure=none; expires=" + date.toGMTString() + ";";
 }
 
 function getCookie()
