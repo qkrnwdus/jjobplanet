@@ -10,17 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jjobplanet.jjobplanet.MailService;
 import com.jjobplanet.jjobplanet.databasemanager.comjoinDB;
+import com.jjobplanet.jjobplanet.databasemanager.indvjoinDB;
 import com.jjobplanet.jjobplanet.databasemanager.loginDB;
 import com.jjobplanet.jjobplanet.databasemanager.noticeWriteDB;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -191,7 +188,6 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	
 	public void login( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		loginDB loginDB = new loginDB();
@@ -238,12 +234,5 @@ public class HomeController {
 		else System.out.println("메일 전송 실패");
 
 	}
-	@GetMapping("/logout")
-	public void logout(HttpServletRequest request)
-	{
-		request.getSession().invalidate();
-	}
 
 }
-	
-
