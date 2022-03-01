@@ -37,7 +37,8 @@
 					<section>
 						<h2>회사 정보</h2>
 						<div style="width: 792px; margin-top: 30px;">
-							<div style="display: flex; width: 1200px;">
+							<div style="width: 100px; height: 100px; border-radius: 10px; background-color: aliceblue;"></div>
+							<div style="display: flex; width: 1200px; margin-top: 30px;">
 								<div style="width: 493px;">
 									<dl>
 										<dt class="company-info-head" >회사명</dt>
