@@ -174,7 +174,7 @@
                             <button onclick="research()">재검색</button>
                			</div>
 
-                        <div id="search-result" style="margin-top: 10px;">
+                        <div id="search-result">
                             <div class="search-result-item" onclick="location.href='./company'">
                                 <div style="width: 100%; margin-left: 16px;">
                                     <div>카카오</div>

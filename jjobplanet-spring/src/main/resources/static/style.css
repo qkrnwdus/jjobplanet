@@ -98,6 +98,11 @@ textarea {
 
 #input-clear { cursor: pointer; }
 
+#search-result {
+	display: grid;
+	margin-top: 10px;
+	row-gap: 16px;
+}
 .search-result-item {
 	display: flex; 
 	align-items: center; 
