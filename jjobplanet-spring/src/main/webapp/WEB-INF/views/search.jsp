@@ -93,13 +93,8 @@
                         
                     }
 
-                })
-
-                
+                })   
             }
-
-
-            
         </script>
        
     </head>
@@ -225,6 +220,7 @@
                         </div>
 
 	                </div>
+                    <div style="display: flex; justify-content: center; margin-top: 16px;"><button>더보기</button></div>
                	</main>
 
                 <!-- FOOTER -->

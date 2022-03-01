@@ -100,7 +100,7 @@ textarea {
 
 #search-result {
 	display: grid;
-	margin-top: 10px;
+	margin-top: 16px;
 	row-gap: 16px;
 }
 .search-result-item {
@@ -402,7 +402,7 @@ textarea {
     line-height: 50px;
 }
 
-.notice_note_row { width:900px; }
+
 .notice_date
 {
     float: right;
