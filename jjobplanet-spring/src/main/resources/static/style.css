@@ -35,7 +35,6 @@ input[type="text"], input[type="email"], input[type="password"] {
 }
 
 button:hover{ cursor: pointer; }
-
 dt, dd { display: inline-block; }
 dt { font-weight: bold; }
 li { list-style: none; }
