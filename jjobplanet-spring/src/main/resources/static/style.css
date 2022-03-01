@@ -72,7 +72,7 @@ textarea {
     align-items: center;
     margin-bottom: 30px;
 
-    background-color: #F5F5F5;
+    /* background-color: #F5F5F5; */
 }
 #warp-header-container {
     width: 100%;
@@ -413,3 +413,22 @@ textarea {
 #search-option-condition  ul li input { margin-right: 4px; }
 #search-option-recruitcategory, #search-option-region,
 #search-option-condition { cursor: pointer; }
+
+#search-option-recruitcategory,
+#search-option-region,
+#search-option-condition {
+	display: none; 
+	width: 130px; 
+	position: absolute; 
+	border-bottom: solid black 1px; 
+	border-left: solid black 1px; 
+	border-right: solid black 1px; 
+	background-color: white;
+
+	cursor: pointer;
+}
+
+#notice-editor-head {
+	border: none;
+	border-bottom: solid #F5F5F5 2px;
+}
