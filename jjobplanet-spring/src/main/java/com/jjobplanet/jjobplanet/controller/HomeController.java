@@ -127,8 +127,13 @@ public class HomeController {
 		return "notice";
 	}
 
+	@GetMapping("/noticeWrite")
+	public String notice_editor() {
+		return "noticeWrite";
+	}
+
 	@GetMapping("/noticeWrite.do")
-	public String noticeWrite() {
+	public String writeNotice() {
 		return "noticeWrite";
 	}
 
