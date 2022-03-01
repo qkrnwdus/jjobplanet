@@ -35,7 +35,6 @@ input[type="text"], input[type="email"], input[type="password"] {
 }
 
 button:hover{ cursor: pointer; }
-
 dt, dd { display: inline-block; }
 dt { font-weight: bold; }
 li { list-style: none; }
@@ -73,7 +72,7 @@ textarea {
     align-items: center;
     margin-bottom: 30px;
 
-    background-color: #F5F5F5;
+    /* background-color: #F5F5F5; */
 }
 #warp-header-container {
     width: 100%;
@@ -87,7 +86,7 @@ textarea {
     border: solid black 1px;
 }
 
-#warp-footer{ background-color: #F5F5F5; }
+/* #warp-footer{ background-color: #F5F5F5; } */
 
  #search-history {
     border-bottom: solid black 1px;
@@ -99,6 +98,11 @@ textarea {
 
 #input-clear { cursor: pointer; }
 
+#search-result {
+	display: grid;
+	margin-top: 16px;
+	row-gap: 16px;
+}
 .search-result-item {
 	display: flex; 
 	align-items: center; 
@@ -398,7 +402,7 @@ textarea {
     line-height: 50px;
 }
 
-.notice_note_row { width:900px; }
+
 .notice_date
 {
     float: right;
@@ -414,3 +418,22 @@ textarea {
 #search-option-condition  ul li input { margin-right: 4px; }
 #search-option-recruitcategory, #search-option-region,
 #search-option-condition { cursor: pointer; }
+
+#search-option-recruitcategory,
+#search-option-region,
+#search-option-condition {
+	display: none; 
+	width: 130px; 
+	position: absolute; 
+	border-bottom: solid black 1px; 
+	border-left: solid black 1px; 
+	border-right: solid black 1px; 
+	background-color: white;
+
+	cursor: pointer;
+}
+
+#notice-editor-head {
+	border: none;
+	border-bottom: solid #F5F5F5 2px;
+}

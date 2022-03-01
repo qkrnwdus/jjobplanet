@@ -40,8 +40,8 @@
             let chomepage = $('#chomepage').val();
 
 
-            if (cmail === '') alert('이메일을 입력해 주세요');
-            else if (cpw === '' || cpw2 === '' ) alert('비밀번호를 입력해 주세요');
+            if (cmail === ''  || !validateEmail(cmail)) alert('이메일을 다시 입력해 주세요 주세요');
+            else if (cpw === '' || cpw2 === ''  || cpw !== cpw2) alert('비밀번호를 다시 입력 주세요');
             else if (cname === '') alert('이메일을 입력해 주세요');
             else if (ccategory === '') alert('이메일을 입력해 주세요');
             else if (csize === '') alert('이메일을 입력해 주세요');
@@ -53,9 +53,9 @@
             else if (cdate === '') alert('이메일을 입력해 주세요');
             else if (cmaintask === '') alert('이메일을 입력해 주세요');
             else if (chomepage === '') alert('이메일을 입력해 주세요');
-
             else {
-                $.ajax({
+                $.ajax(
+                {
                     url: 'joinokCompany.do',
                     method: 'POST',
                     dataType: "json",
@@ -74,15 +74,34 @@
                         'cworkers' : cworkers,
                         'chomepage' : chomepage
                     },
-                    success : (response) => { location.href = '/'; },
+                    success : (response) => {
+                        if(response.result === 'SUCCESS') location.href='joinOk.do';
+                    },
                     error : (response) => { alert('오류가 발생하였습니다. 잠시후 재시도 해주세요'); }
 
                 })
             }			
         }
 
-        function idCheck()
+        function validateCompanyEmail() 
         {
+            let mail = $('#cmail').val();
+            if(validateEmail(mail))
+            {
+                $.ajax({
+                    url: 'validate.do',
+                    method: 'POST',
+                    data: {
+                        'mail' : mail,
+                        'tpye' : 'company'				           
+                    },
+                    success : (response) => {   
+                        if(response.result === 'VALIDATED') alert('사용가능한 이메일 주소입니다.');
+                        else alert('사용이 불가능한 이메일 주소입니다.');
+                    },
+                    error : (response) => { alert('오류가 발생하였습니다. 잠시후 재시도 해주세요'); }   
+                })
+            } else alert('이메일을 다시 입력해 주세요 주세요');
             
         }
         
@@ -98,28 +117,34 @@
                 <div> 
                     
                     <h1>회원가입(기업)</h1>
-                    <div style="margin-top: 40px;">
-                        <dl>
-                            <dt class="join-company-info-head">이메일</dt>
-                            <dd>
-                                <div>
+                    <div style="display: grid; row-gap: 16px; "> 
+                        <div style="display: flex; margin-top: 40px; column-gap: 16px; ">
+                            <dl>
+                                <dt class="join-company-info-head">이메일</dt>
+                                <dd>
                                     <input type="email" size="20" name="cmail" id="cmail">
-                                    <input type="button" value="중복확인" id="join_button" onclick="idCheck();">
-                                </div>
-                            </dd>
-                        </dl>
-                    </div>
-                    <div style="display: flex; justify-content: space-between;">                                                       
-                            
-                        <div>
+                                </dd>
+                            </dl>
+
+                            <dl>
+                                <dd><input type="button" value="중복확인" id="join_button" onclick="validateCompanyEmail();"></dd>
+                            </dl>
+                        </div>
+                        <div style="display: flex; column-gap: 16px;">
                             <dl>
                                 <dt class="join-company-info-head">비밀번호</dt>
                                 <dd>
                                     <input type="password" size="20" id="cpw">
                                 </dd>
                             </dl>
+    
+                            <dl>
+                                <dt class="join-company-info-head">비밀번호확인</dt>
+                                <dd><input type="password" size="20" id="cpw2"></dd>
+                            </dl>
+                        </div>
 
-                            
+                        <div style="display: flex; column-gap: 16px;">
                             <dl>
                                 <dt class="join-company-info-head">기업명</dt>
                                 <dd>
@@ -132,6 +157,9 @@
                                     <input type="text" size="20" id="ccategory">
                                 </dd>
                             </dl>
+                        </div>
+
+                        <div style="display: flex; column-gap: 16px;">
                             <dl>
                                 <dt class="join-company-info-head">기업구분</dt>
                                 <dd>
@@ -144,29 +172,27 @@
                                     <input type="text" size="20" id="ceoname">
                                 </dd>
                             </dl>
+                        </div>
+
+                        <div style="display: flex; column-gap: 16px;">
                             <dl>
                                 <dt class="join-company-info-head">4대 보험</dt>
                                 <dd>
                                     <input type="text" size="20" id="cinsurance">
                                 </dd>
                             </dl>
-
-
+    
+    
                             <dl>
                                 <dt class="join-company-info-head">주소</dt>
                                 <dd>
-                                    <input type="text" size="60" id="caddress">
+                                    <input style="display: block" type="text" size="60" id="caddress">
                                 </dd>
                             </dl>
-                            
+    
                         </div>
 
-                        <div>
-                            <dl>
-                                <dt class="join-company-info-head">비밀번호확인</dt>
-                                <dd><input type="password" size="20" id="cpw2"></dd>
-                            </dl>
-
+                        <div style="display: flex; column-gap: 16px;">
                             <dl>
                                 <dt class="join-company-info-head">사업자 번호</dt>
                                 <dd><input type="text" size="20" id="cnumber"></dd>
@@ -175,6 +201,9 @@
                                 <dt class="join-company-info-head">사원수</dt>
                                 <dd><input type="text" size="20" id="cworkers"></dd>
                             </dl>
+                        </div>
+                        
+                        <div style="display: flex; column-gap: 16px;">
                             <dl>
                                 <dt class="join-company-info-head">설립일</dt>
                                 <dd><input type="text" size="20" ="cdate" id="cdate"></dd>
@@ -183,16 +212,21 @@
                                 <dt class="join-company-info-head">주요사업</dt>
                                 <dd><input type="text" size="20" id="cmaintask"></dd>
                             </dl>
+                           
+                        </div>
+                        <div>
                             <dl>
                                 <dt class="join-company-info-head">홈페이지</dt>
                                 <dd><input type="text" size="20" id="chomepage"></dd>
                             </dl>
                         </div>
+
+                        <div style="margin-top: 16px;"><textarea style="width: 100%; height: 200px;" readonly></textarea></div>
+                        <div style="margin-top: 16px;"><input type="checkbox" style="margin-right: 8px;" >약관에 동의합니다.</div>
+                        <div style="margin-top: 16px;"><button onclick="formCheck()">가입완료</button></div>
                     </div>              
                 <div>
-                    <div style="margin-top: 16px;"  ><textarea style="width: 600px;height: 200px; "></textarea><br></div>
-                    <div style="margin-top: 16px;" > <input type="checkbox" style="margin-right: 8px;" readonly>약관에 동의합니다.</div>
-                    <div style="margin-top: 16px;"><button onclick="formCheck()">가입완료</button></div>
+                    
                 </div>   
             </div> 
         </div>

@@ -1,10 +1,13 @@
 package com.jjobplanet.jjobplanet;
 
 import java.util.Properties;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.mail.javamail.MimeMessageHelper;
+
 
 @Service
 public class MailService {
@@ -20,12 +23,6 @@ public class MailService {
                
         try {
             
-            SimpleMailMessage message = new SimpleMailMessage();
-
-            message.setTo(target);
-            message.setSubject("인증 메일입니다.");
-            message.setText("인증을 완료해주세요.");
-    
             JavaMailSenderImpl sender = new JavaMailSenderImpl();
             sender.setHost(MAIL_HOST);
             sender.setPort(MAIL_PORT);
@@ -35,11 +32,26 @@ public class MailService {
             Properties properties = System.getProperties();
             properties.put("mail.smtp.starttls.enable", true);
             sender.setJavaMailProperties(properties);
+
+
+            // SimpleMailMessage message = new SimpleMailMessage();
+            MimeMessage message = sender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+            helper.setTo(target);
+            helper.setSubject("안녕하세요. JJobplanet입니다. 인증 메일입니다.");
+
+            //helper.setText("JJobplanet을 사용하기 위해 계정을 인증을 완료해주세요.");
+            
+            
+            helper.setText("<h3>JJobplanet을 사용하기 위해 계정을 인증을 완료해주세요.</h3>" 
+                        +  "<button>인증하기</button>", true);
+
+
     
             sender.send(message);
 
             return true;
 
-        } catch(Exception e) {      return false;        }
+        } catch(Exception e) { return false; }
     }
 }

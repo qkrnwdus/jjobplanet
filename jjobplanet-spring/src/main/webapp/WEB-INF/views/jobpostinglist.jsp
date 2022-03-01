@@ -41,9 +41,10 @@
                                 <div style="margin-top: 20px;"><a href="./jobpostinglist">채용공고 작성내역</a></div>
                                 <div style="margin-top: 20px;"><a href="./recruitment">채용공고 작성</a></div>
                             </div>
+                            <div>
                                 <!-- 내용 -->
                                 <div style="width: 957px;">
-                                <h2>채용 공고 작성내역</h2><br>
+                                <h2>채용 공고 작성내역</h2>
                                     <div>총 4개의 채용공고 작성 내역이 있습니다.</div>
                                     <div style="margin-top: 30px; width: 100%;">
                                         <div style="display: flex; width: 100%; margin-bottom: 16px; align-items: center;">

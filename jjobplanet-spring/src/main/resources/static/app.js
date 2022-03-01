@@ -119,3 +119,11 @@ function removeCookie(key)
     document.cookie = key + '=key; path=/; expires=' + data.toGMTString()+';';
     getCookie();
 }
+
+function validateEmail(email)
+{
+    const regx = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+
+    if(regx.test(email)) return true;
+    else return false;
+}

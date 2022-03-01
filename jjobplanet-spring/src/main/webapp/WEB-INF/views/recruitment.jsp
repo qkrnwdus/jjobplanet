@@ -34,7 +34,7 @@
                 
                 <!--  MAIN -->
                	<main>
-               		 <div id="warp-main">
+               		 <div id="warp-main" >
                         <div style="display: flex;" >
                             <div style="width: 243px; height: 326px; text-align: center;">
                                 <a href="./mypage_company" style="margin-top: 20px;"><span class="material-icons-outlined" style="font-size: 90px;">face</span></a>
