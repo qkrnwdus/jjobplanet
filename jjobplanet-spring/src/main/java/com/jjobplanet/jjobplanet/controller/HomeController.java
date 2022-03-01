@@ -35,6 +35,12 @@ public class HomeController {
 	{
 		return "company";
 	}
+
+	@GetMapping("/company.do")
+	public String searchCompany(HttpServletRequest request)
+	{
+		return "company_info";
+	}
 	
 	@GetMapping("/recruit")
 	public String recruit()
