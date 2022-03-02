@@ -49,7 +49,7 @@
                             <button onclick="location.href='./faq'">FAQ</button>
                         </div> -->
 	                </div>
-                    <div class="policy_body_wrap">
+                    <div class="policy_body_wrap" style="padding: 16px; border: solid black 1px">
                         <div class="policy_contents_wrap">
                             <h1>이용약관</h1>
                             <h3>제 1조(목적)</h3>

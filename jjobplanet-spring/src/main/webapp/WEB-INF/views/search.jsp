@@ -67,9 +67,10 @@
             function research() {
                 
                 let keyword = '<%= request.getParameter("key")%>';
-                let cat = $('input[name="recruitcategory:checked"').val();
-                let region = $('input[name="region:checked"').val();
-                let career = $('input[name="condition:checked"').val();
+                let cat = $('input[name="recruitcategory:checked"]').val();
+                let region = $('input[name="region:checked"]').val();
+                let career = $('input[name="condition:checked"]').val();
+
 
                 console.log(cat);
                 console.log(region);
@@ -80,9 +81,9 @@
                     url: '/search.do',
                     method: 'GET',
                     data: {
-                        'key': keyword ,
-                        'cat': cat ,
-                        'region': region ,
+                        'key': keyword,
+                        'cat': cat,
+                        'region': region,
                         'career': career
                     },
                     success: (response) => {
@@ -92,13 +93,8 @@
                         
                     }
 
-                })
-
-                
+                })   
             }
-
-
-            
         </script>
        
     </head>
@@ -119,7 +115,7 @@
                                     <span style="width: 100%; margin-right: 16px">채용분야</span>
                                     <span class="material-icons">expand_more</span>
                                 </div>   
-                                <div id="search-option-recruitcategory" style=" display: none; width: 130px; position: absolute; border: solid black 1px; background-color: white;">
+                                <div id="search-option-recruitcategory" >
                                     <ul>
                                         <li><input type="radio" name="recruitcategory" value="1" checked>프론트엔드</li>
                                         <li><input type="radio" name="recruitcategory" value="2">백엔드</li>
@@ -140,7 +136,7 @@
                                     <span class="material-icons">expand_more</span>
                                     
                                 </div>
-                                <div id="search-option-region" style=" display: none; width: 130px; position: absolute; border: solid black 1px; background-color: white;">
+                                <div id="search-option-region" >
                                     <ul>
                                         <li><input type="radio" name="region" value="1" checked>서울</li>
                                         <li><input type="radio" name="region" value="2">부산</li>
@@ -161,7 +157,7 @@
                                     <span class="material-icons">expand_more</span>
                                     
                                 </div>
-                                <div id="search-option-condition" style=" display: none; width: 130px; position: absolute; border: solid black 1px; background-color: white;">
+                                <div id="search-option-condition" >
                                     <ul>
                                         <li><input type="radio" name="condition" value="0" checked>경력무관</li>
                                         <li><input type="radio" name="condition" value="1">신입</li>
@@ -173,7 +169,7 @@
                             <button onclick="research()">재검색</button>
                			</div>
 
-                        <div id="search-result" style="margin-top: 10px;">
+                        <div id="search-result">
                             <div class="search-result-item" onclick="location.href='./company'">
                                 <div style="width: 100%; margin-left: 16px;">
                                     <div>카카오</div>
@@ -224,6 +220,7 @@
                         </div>
 
 	                </div>
+                    <div style="display: flex; justify-content: center; margin-top: 16px;"><button>더보기</button></div>
                	</main>
 
                 <!-- FOOTER -->

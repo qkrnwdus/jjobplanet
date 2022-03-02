@@ -68,7 +68,7 @@ function setCookie()
     let date = new Date();
     date.setDate(date.getDate() + 365);
     
-    document.cookie = keyword + "=" + keyword + "; path=/; expires=" + date.toGMTString() + ";";
+    document.cookie = keyword + "=" + keyword + "; path=/; secure=none; expires=" + date.toGMTString() + ";";
 }
 
 function getCookie()
@@ -118,4 +118,12 @@ function removeCookie(key)
     let data = new Date();
     document.cookie = key + '=key; path=/; expires=' + data.toGMTString()+';';
     getCookie();
+}
+
+function validateEmail(email)
+{
+    const regx = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+
+    if(regx.test(email)) return true;
+    else return false;
 }

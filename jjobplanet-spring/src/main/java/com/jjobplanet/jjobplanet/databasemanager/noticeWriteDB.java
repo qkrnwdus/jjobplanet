@@ -1,7 +1,6 @@
 package com.jjobplanet.jjobplanet.databasemanager;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -23,7 +22,6 @@ public class noticeWriteDB
 		String userid = "mskim";
 		String passwd = "Sudwhd12!";
 		
-		PrintWriter out = response.getWriter();
 		JSONObject object = new JSONObject();
 		
 		try(Connection conn =  DriverManager.getConnection(host,userid,passwd);

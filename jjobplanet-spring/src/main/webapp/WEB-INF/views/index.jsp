@@ -1,4 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession"%>
+
+<%
+    HttpSession sessions = request.getSession();
+    Object a = sessions.getAttribute("no");
+    if(a != null)
+    {
+        System.out.println("로그인");
+        System.out.println(a.toString());
+    } else System.out.println("로그아웃");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -29,25 +41,7 @@
                 <!--  MAIN -->
                	<main>
                		 <div id="warp-main">
-	                    <div style="margin-top: 30px;">
-                            <h3>별점이 높은 기업</h3>
-                            <div style="display: grid; margin-top: 16px; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px;">
-                                <div class="item" style="width: 291px; height: 128px; background-color: #F5F5F5;"></div>
-                                <div class="item " style="width: 291px; height: 128px; background-color: #F5F5F5;"></div>
-                                <div class="item" style="width: 291px; height: 128px; background-color: #F5F5F5;"></div>
-                                <div class="item" style="width: 291px; height: 128px; background-color: #F5F5F5;"></div>
-                            </div>
-                        </div>
-
-                        <div style="margin-top: 30px;">
-                            <h3>채용 추천 기업</h3>
-                            <div style="display: grid; margin-top: 16px; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px;">
-                                <div class="item" style="width: 291px; height: 128px; background-color: #F5F5F5;"></div>
-                                <div class="item" style="width: 291px; height: 128px; background-color: #F5F5F5;"></div>
-                                <div class="item" style="width: 291px; height: 128px; background-color: #F5F5F5;"></div>
-                                <div class="item" style="width: 291px; height: 128px; background-color: #F5F5F5;"></div>
-                            </div>
-                        </div>
+	                    
 	                </div>
                	</main>
 

@@ -20,6 +20,7 @@
         <!-- SCRIPT-->
         <script src="./app.js"></script>       
         <script src="./jquery-3.6.0.min.js"></script>
+        <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
         
     </head>
     <body>
@@ -34,17 +35,25 @@
                	<main>
                		 <div id="warp-main">
 	                    <!-- 내용 -->
-                        <form name="notice" action="/noticeWriteAction.do" method="post">
-                            <div>
-                                제목
-                                <input type="text" name="noticetitle">
-                            </div>
-                            <div>
-                                내용
-                                <textarea name="noticenote"></textarea>
-                            </div>
-                            <input type="submit" value="작성">
-                        </form>                      
+                        <h2>공지사항 작성</h2>
+                        <form>
+                            <div style="display: grid; row-gap: 16px;">
+                                <input type="text" id="notice-editor-head" style="width: 500px; height: 70px; font-size: 30px;" placeholder="제목을 입력해 주세요" required>
+                                <div id="editor"></div>
+                                <script>
+                                    const editor = new toastui.Editor(
+                                    {
+                                        el: document.querySelector('#editor'),
+                                        initialEditType: 'wysiwyg',
+                                        width: '100%',
+                                        height: '500px',
+                                        initialValue: '',
+                                        /* toolbarItems: [] */
+                                    });
+                                </script>
+                                <button type="submit">공지사항 올리기</button>
+                            </div>           
+                        </form>        
 	                </div>
                	</main>
 

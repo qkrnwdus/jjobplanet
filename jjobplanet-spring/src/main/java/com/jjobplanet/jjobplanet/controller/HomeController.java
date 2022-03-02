@@ -1,14 +1,18 @@
 package com.jjobplanet.jjobplanet.controller;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.PrintWriter;
+
+
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 import com.jjobplanet.jjobplanet.databasemanager.comjoinDB;
 import com.jjobplanet.jjobplanet.databasemanager.indvjoinDB;
@@ -19,16 +23,24 @@ import com.jjobplanet.jjobplanet.domain.noticeDAO;
 import com.jjobplanet.jjobplanet.domain.noticeDTO;
 import com.mysql.cj.Session;
 
+import com.jjobplanet.jjobplanet.MailService;
+
+import com.jjobplanet.jjobplanet.databasemanager.noticeWriteDB;
+import com.jjobplanet.jjobplanet.domain.AccountDao;
+
+
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
@@ -43,6 +55,12 @@ public class HomeController {
 	public String company()
 	{
 		return "company";
+	}
+
+	@GetMapping("/company.do")
+	public String searchCompany(HttpServletRequest request)
+	{
+		return "company_info";
 	}
 	
 	@GetMapping("/recruit")
@@ -154,8 +172,13 @@ public class HomeController {
 		return nvList;
 	}
 
+	@GetMapping("/noticeWrite")
+	public String notice_editor() {
+		return "noticeWrite";
+	}
+
 	@GetMapping("/noticeWrite.do")
-	public String noticeWrite() {
+	public String writeNotice() {
 		return "noticeWrite";
 	}
 
@@ -182,41 +205,49 @@ public class HomeController {
 		return "join";
 	}
 	
-	@RequestMapping(value = "/joinOk.do", method = RequestMethod.POST )
-	public String joinOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-		String umail = request.getParameter("umail");
-		String upw = request.getParameter("upw");
-		System.out.println("umail= " + umail + " upw= " + upw);
+	@RequestMapping(value = "/joinOk.do", method = RequestMethod.POST)
+	public String joinOk(HttpServletRequest request, HttpServletResponse response)
+	{
+		AccountDao account = new AccountDao();
+		boolean result = account.joinoUser(request);
 
-		indvjoinDB injoin = new indvjoinDB();
-		injoin.doPost(request, response);
+		if(result)
+		{
+			MailService mailsevrice = new MailService();
 		
-		return "joinOk";
+			if(mailsevrice.sendMail(request.getParameter("umail")))
+			{
+				System.out.println("메일 전송 성공");
+				return "joinOk"; 
+			} else { 
+				
+				System.out.println("메일 전송 실패");	
+				return "redirect:/"; 
+			}		
+		} return "error/500";
 	}
 	
 	@RequestMapping(value = "/joinokCompany.do", method = RequestMethod.POST)
-	public String joinOkcompany(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String joinOkcompany(HttpServletRequest request, HttpServletResponse response)
+	{
 				
-		String cmail = request.getParameter("cmail");
-		String cpw  = request.getParameter("cpw");
-		String cname = request.getParameter("cname");
-		String ccategory  = request.getParameter("ccategory");
-		String csize = request.getParameter("csize");
-		String ceoname  = request.getParameter("ceoname");
-		String cinsurance = request.getParameter("cinsurance");
-		String caddress  = request.getParameter("caddress");
-		String cnumber = request.getParameter("cnumber");
-		String cworkers  = request.getParameter("cworkers");
-		String cdate  = request.getParameter("cdate");
-		String cmaintask  = request.getParameter("cmaintask");
-		String chomepage  = request.getParameter("chomepage");
-		System.out.println("umail= " + cmail + " upw= " + cpw);
-
-		comjoinDB comjoin = new comjoinDB();
-		comjoin.doComjoin(request, response);
+		AccountDao account = new AccountDao();
+		boolean result = account.joinCompany(request);
 		
-		return "joinokCompany";
+		if(result)
+		{
+			MailService mailsevrice = new MailService();
+		
+			if(mailsevrice.sendMail(request.getParameter("umail")))
+			{
+				System.out.println("메일 전송 성공");
+				return "redirect:/joinOk"; 
+			} else { 
+				
+				System.out.println("메일 전송 실패");	
+				return "redirect:/"; 
+			}		
+		} return "error/500";
 	}
 	
 	@GetMapping("/login")
@@ -225,16 +256,21 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, RedirectAttributes setAttribute) throws ServletException, IOException {
-				
-		String umail = request.getParameter("umail");
-		String upw = request.getParameter("upw");		
-		System.out.println("umail= " + umail + " upw= " + upw);
+	public void login( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		AccountDao account = new AccountDao();
+		//boolean result = account.login(request);
+		String result = account.login(request);
+		// ModelAndView view = new ModelAndView();
 
-		loginDB logindb  = new loginDB();
-		logindb.doLogin(request, setAttribute);
+		// view.setViewName("index");
 
-		return login(null, null);
+		// if(result) return view;
+		// else return null;
+
+		PrintWriter out = response.getWriter();
+		out.print(result);
+
 	}
 
 
@@ -264,5 +300,18 @@ public class HomeController {
 		return "findPasswordOk";
 	}
 
+
+	@RequestMapping("/validate.do")
+	public void validateEmail(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		AccountDao accountDao = new AccountDao();
+
+		String type = request.getParameter("type");
+		String email = request.getParameter("mail");
+		Boolean result = accountDao.validateEmail(type, email);
+
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
 	
 }

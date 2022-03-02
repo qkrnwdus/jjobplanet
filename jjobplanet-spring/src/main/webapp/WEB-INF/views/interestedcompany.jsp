@@ -44,8 +44,8 @@
                             <div style="width: 957px;">
                                 <h2>관심 기업</h2>
                                 <div>총 2개의 관심기업이 있습니다.</div>
-                                <div style="margin-top: 30px; width: 100%;">
-                                    <div style="display: flex; width: 100%; margin-bottom: 16px; align-items: center;">
+                                <div style=" margin-top: 30px; width: 100%;">
+                                    <div style="display: flex; width: 100%; padding: 16px 0; align-items: center; border-bottom: solid #f5f5f5 1px;"">
                                         <span class="material-icons-outlined" style="font-size: 50px;">business</span>
                                         <div id = "company_contents_text1" style="margin-left: 16px;"> 
                                             <div class = "company_contents_text_item1">(주)오피지지</div> 
@@ -58,9 +58,10 @@
                                             <div class = "company_contents_text_item3">평균 3,680만원</div>
                                         </div>
                                     </div>
-                                    <div style="display: flex; margin-bottom: 16px">
+
+                                    <div style="display: flex; width: 100%; padding: 16px 0; align-items: center; border-bottom: solid #f5f5f5 1px;"">
                                         <span class="material-icons-outlined" style="font-size: 50px;">business</span>
-                                        <div class = "company_contents_text1" style="margin-left: 16px;"> 
+                                        <div id = "company_contents_text1" style="margin-left: 16px;"> 
                                             <div class = "company_contents_text_item1">(주)오피지지</div> 
                                             <div class = "company_contents_text_item2">IT/웹/통신 | 서울</div> 
                                             <div class = "company_contents_text_item2">18 기업 리뷰</div>
@@ -71,6 +72,7 @@
                                             <div class = "company_contents_text_item3">평균 3,680만원</div>
                                         </div>
                                     </div>
+
                                 </div>
     
                             </div>
