@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -49,6 +50,35 @@
                                     <span class="notice_title">제목</span>
                                     <span class="notice_date">등록일</span>
                                 </div>
+
+                                <div class="notice_td_row">
+                                    <span class="notice_title"><a href="javascript:openNotice(${noticeviewList[0]});">${noticeviewList[1]}</a></span>
+                                    <span class="notice_date">${noticeviewList[2]}</span>
+                                </div>
+                                <div id="notice_notice7" class="notice_note_row">
+                                    <span class="notice_note">${noticeviewList[3]}</span>
+                                </div>
+                                <div class="notice_td_row">
+                                    <span class="notice_title"><a href="javascript:openNotice(${noticeviewList[4]});">${noticeviewList[5]}</a></span>
+                                    <span class="notice_date">${noticeviewList[6]}</span>
+                                </div>
+                                <div id="notice_notice8" class="notice_note_row">
+                                    <span class="notice_note">${noticeviewList[7]}</span>
+                                </div>
+                                <div class="notice_td_row">
+                                    <span class="notice_title"><a href="javascript:openNotice(${noticeviewList[8]});">${noticeviewList[9]}</a></span>
+                                    <span class="notice_date">${noticeviewList[10]}</span>
+                                </div>
+                                <div id="notice_notice9" class="notice_note_row">
+                                    <span class="notice_note">${noticeviewList[11]}</span>
+                                </div>
+                                <div class="notice_td_row">
+                                    <span class="notice_title"><a href="javascript:openNotice(${noticeviewList[12]});">${noticeviewList[13]}</a></span>
+                                    <span class="notice_date">${noticeviewList[14]}</span>
+                                </div>
+                                <div id="notice_notice10" class="notice_note_row">
+                                    <span class="notice_note">${noticeviewList[15]}</span>
+
                                 <div style="display: grid; row-gap: 8px;">
                                     <div>
                                         <div class="notice_td_row">
@@ -91,17 +121,22 @@
                                             </span>
                                         </div>
                                     </div>
+
                                 </div>
-                                <!--
                                 <div class="notice_td_row">
-                                    <span class="notice_title"><a href="javascript:openNotice(2);">공지제목입니다2</a></span>
-                                    <span class="notice_date">2020-02-02</span>
+                                    <span class="notice_title"><a href="javascript:openNotice(${noticeviewList[16]});">${noticeviewList[17]}</a></span>
+                                    <span class="notice_date">${noticeviewList[18]}</span>
                                 </div>
-                                <div id="notice_notice2" class="notice_note_row">
-                                    <span class="notice_note">공지내용입니다2</span>
+                                <div id="notice_notice11" class="notice_note_row">
+                                    <span class="notice_note">${noticeviewList[19]}</span>
                                 </div>
+
+                  
+                                <a href="<%= request.getContextPath() %>/noticeWrite.do"><input type="button" value="작성" style="float:right;"></a>
+
                                 -->
                                 <a href="./noticeWrite"><input type="button" value="작성" style="float:right;"></a>
+
                             </div>
                         </div>
 	                </div>
